@@ -675,18 +675,20 @@ static char kWRSystemNavBarTitleColorKey;
 // navigationBar backgroundImage
 - (UIImage *)wr_navBarBackgroundImage {
         
-//    UIImage *image = (UIImage *)objc_getAssociatedObject(self, &kWRNavBarBackgroundImageKey);
-//    image = (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
-//    return image;
+
+    if (!self.navigationController) { return [WRNavigationBar defaultNavBarBackgroundImage]; }
+   UIImage *image = (UIImage *)objc_getAssociatedObject(self, &kWRNavBarBackgroundImageKey);
+   image = (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
+   return image;
 //
     //因为功能被废弃，所以修正一下
     
     //如果不存在导航栏，返回默认的即可
-    if (!self.navigationController) { return [WRNavigationBar defaultNavBarBackgroundImage]; }
+    // if (!self.navigationController) { return [WRNavigationBar defaultNavBarBackgroundImage]; }
     
-    UIImage *image = [self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault];
+    // UIImage *image = [self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault];
     
-    return (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
+    // return (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
     
 }
 - (void)wr_setNavBarBackgroundImage:(UIImage *)image {
