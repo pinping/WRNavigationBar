@@ -11,6 +11,18 @@
 #import <objc/runtime.h>
 #import "sys/utsname.h"
 
+
+#define isPad ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+//判断iPhoneX
+#define IS_IPHONE_X ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
+//判断iPHoneXr
+#define IS_IPHONE_Xr ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(828, 1792), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
+//判断iPhoneXs
+#define IS_IPHONE_Xs ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125, 2436), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
+//判断iPhoneXs Max
+#define IS_IPHONE_Xs_Max ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1242, 2688), [[UIScreen mainScreen] currentMode].size) && !isPad : NO)
+
+
 @implementation WRNavigationBar
 
 + (BOOL)isIphoneX {
@@ -22,8 +34,18 @@
         return (CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(375, 812)) ||
                 CGSizeEqualToSize([UIScreen mainScreen].bounds.size, CGSizeMake(812, 375)));
     }
-    BOOL isIPhoneX = [platform isEqualToString:@"iPhone10,3"] || [platform isEqualToString:@"iPhone10,6"];
-    return isIPhoneX;
+    // BOOL isIPhoneX = [platform isEqualToString:@"iPhone10,3"] || [platform isEqualToString:@"iPhone10,6"];
+    if(IS_IPHONE_X==YES){
+        return YES;
+    }else if (IS_IPHONE_Xr ==YES){
+        return YES;
+    }else if (IS_IPHONE_Xs ==YES){
+        return YES;
+    }else if (IS_IPHONE_Xs_Max ==YES){
+        return YES;
+    }else{
+        return NO;
+    }
 }
 + (CGFloat)navBarBottom {
     return [self isIphoneX] ? 88 : 64;
@@ -652,9 +674,20 @@ static char kWRSystemNavBarTitleColorKey;
 
 // navigationBar backgroundImage
 - (UIImage *)wr_navBarBackgroundImage {
-    UIImage *image = (UIImage *)objc_getAssociatedObject(self, &kWRNavBarBackgroundImageKey);
-    image = (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
-    return image;
+        
+//    UIImage *image = (UIImage *)objc_getAssociatedObject(self, &kWRNavBarBackgroundImageKey);
+//    image = (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
+//    return image;
+//
+    //因为功能被废弃，所以修正一下
+    
+    //如果不存在导航栏，返回默认的即可
+    if (!self.navigationController) { return [WRNavigationBar defaultNavBarBackgroundImage]; }
+    
+    UIImage *image = [self.navigationController.navigationBar backgroundImageForBarMetrics:UIBarMetricsDefault];
+    
+    return (image == nil) ? [WRNavigationBar defaultNavBarBackgroundImage] : image;
+    
 }
 - (void)wr_setNavBarBackgroundImage:(UIImage *)image {
     if ([[self wr_customNavBar] isKindOfClass:[UINavigationBar class]]) {
