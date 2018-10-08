@@ -102,7 +102,7 @@
     NSInteger top = ([WRCustomNavigationBar isIphoneX]) ? 44 : 20;
     NSInteger margin = 0;
     NSInteger buttonHeight = 44;
-    NSInteger buttonWidth = 44;
+    NSInteger buttonWidth = 74;
     NSInteger titleLabelHeight = 44;
     NSInteger titleLabelWidth = 180;
 
