@@ -102,14 +102,14 @@
     NSInteger top = ([WRCustomNavigationBar isIphoneX]) ? 44 : 20;
     NSInteger margin = 0;
     NSInteger buttonHeight = 44;
-    NSInteger buttonWidth = 74;
+    NSInteger buttonWidth = 44;
     NSInteger titleLabelHeight = 44;
     NSInteger titleLabelWidth = 180;
 
     self.backgroundView.frame = self.bounds;
     self.backgroundImageView.frame = self.bounds;
     self.leftButton.frame = CGRectMake(margin, top, buttonWidth, buttonHeight);
-    self.rightButton.frame = CGRectMake(kWRScreenWidth - buttonWidth - margin, top, buttonWidth, buttonHeight);
+    self.rightButton.frame = CGRectMake(kWRScreenWidth - buttonWidth - margin, top, 64, buttonHeight);
     self.titleLable.frame = CGRectMake((kWRScreenWidth - titleLabelWidth) / 2, top, titleLabelWidth, titleLabelHeight);
     self.bottomLine.frame = CGRectMake(0, (CGFloat)(self.bounds.size.height-0.5), kWRScreenWidth, 0.5);
 }
