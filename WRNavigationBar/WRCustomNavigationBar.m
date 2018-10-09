@@ -109,7 +109,7 @@
     self.backgroundView.frame = self.bounds;
     self.backgroundImageView.frame = self.bounds;
     self.leftButton.frame = CGRectMake(margin, top, buttonWidth, buttonHeight);
-    self.rightButton.frame = CGRectMake(kWRScreenWidth - buttonWidth - margin, top, 64, buttonHeight);
+    self.rightButton.frame = CGRectMake(kWRScreenWidth - buttonWidth - margin, top, buttonWidth, buttonHeight);
     self.titleLable.frame = CGRectMake((kWRScreenWidth - titleLabelWidth) / 2, top, titleLabelWidth, titleLabelHeight);
     self.bottomLine.frame = CGRectMake(0, (CGFloat)(self.bounds.size.height-0.5), kWRScreenWidth, 0.5);
 }
